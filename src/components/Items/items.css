@@ -1,0 +1,11 @@
+.items{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    width: 100%;
+}
+.itemsElement{
+    margin:1px;
+    max-height: 50px;
+}

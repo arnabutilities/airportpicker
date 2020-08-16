@@ -1,0 +1,20 @@
+.paging {
+    display: flex;
+    flex-direction:row-reverse;
+    font-size: 1.5rem;
+    justify-content:space-between;
+    color: #666666;
+}
+.enabled{
+    color: #666666;
+    cursor: pointer;
+}
+.disabled {
+    color: #EFEFEF;
+}
+.hide{
+    display: none;
+}
+.show {
+    display: flex;
+}

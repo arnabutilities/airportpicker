@@ -1,0 +1,44 @@
+.picker{
+    min-width: 600px;
+}
+.selectorPanel {
+    width: calc( 100% - 5px);
+    min-height: 200px;
+    padding:5px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    transition: height 1s, display 2s;
+}
+.search{
+    display: flex;
+    flex-direction: row;
+}
+.button {
+    margin-left: 8px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
+}
+.items{
+    
+}
+.paging{
+    height: 32px;
+    padding:10px;
+}
+.showCard{
+    display: flex;
+}
+.hideCard{
+    display: none;
+}
+.loader{
+    font-size: 0.9rem;
+    text-align: center;
+    font-weight: 600;
+}
+.loaderShow{
+    display: block;
+}
+.loaderHide{
+    display: none;
+}
