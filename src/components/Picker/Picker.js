@@ -101,6 +101,10 @@ const Picker = (props) => {
     setPickerState({...picker, selections:selectionList});
   }
 
+  const clearSelection = () => {
+      setPickerState({...picker, selections: []});
+  }
+
   return (<div
     className={clsx(classes.picker)}
     ref = {pickerElementRef} >
@@ -112,7 +116,7 @@ const Picker = (props) => {
       className={clsx(classes.selectorPanel, picker.showCard ? classes.showCard : classes.hideCard)}
       {...other}
     >
-      <Search onSearch={handelSearch} onReset={resetSearch} totalRecords={picker.data.length} className={clsx(classes.search)}></Search>
+      <Search onSearch={handelSearch} onReset={resetSearch} totalSelection={picker.selections} onClearSelection={clearSelection} totalRecords={picker.data.length} className={clsx(classes.search)}></Search>
       <div className={clsx(classes.loader, picker.showLoading ? classes.loaderShow : classes.loaderHide)}>Loading...</div>
       {/* <div className={clsx(classes.loader, picker.data.length == 0 ? classes.loaderShow : classes.loaderHide)}>Please provide a valid airport or city name.</div> */}
       <Items itemList={picker.data} selectedItems={picker.selections} onChangeSelection={changeSelection} className={clsx(classes.items)}></Items>

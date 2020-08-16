@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 const Search = (props) => {
-  const { onSearch, onReset, totalRecords, className, ...other } = props;
+  const { onSearch, onReset, onClearSelection, totalRecords, totalSelection, className, ...other } = props;
   const searchRef = React.useRef(null);
 
   const clearSearch = () => {
@@ -14,6 +14,10 @@ const Search = (props) => {
     searchRef.current.value = "";
     searchRef.current.focus();
     onReset();
+  }
+
+  const clearSelection = () => {
+    onClearSelection();
   }
 
   return (
@@ -26,6 +30,12 @@ const Search = (props) => {
         <div className={clsx(classes.clearInfo)}>{totalRecords > 999 ? "999+" : totalRecords} </div>
         <div className={clsx(classes.clearCloseButton)}>
         <FontAwesomeIcon onClick={clearSearch} icon={faTimesCircle} />
+        </div>
+      </div>
+      <div className={clsx(classes.totalSection, totalSelection.length > 0 ? classes.visible : classes.invisible)}>
+        <div className={clsx(classes.clearInfo)}>Selected {totalSelection.length > 999 ? "999+" : totalSelection.length} </div>
+        <div className={clsx(classes.clearCloseButton)}>
+        <FontAwesomeIcon onClick={clearSelection} icon={faTimesCircle} />
         </div>
       </div>
     </div>

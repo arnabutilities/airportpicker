@@ -8,38 +8,47 @@ const Home = (props) => {
     const [home, setHomeState] = useState({
         data:[],
         selections:[],
-        refreshData: false
+        refreshData: true
     });
     let dataSearch;
-    let dataRefreshed = false;
+
 
 
     useEffect(() => {
         // API Calls goes here    
-        fetch("/airports.json").then((res) => res.json()).then((respData) => {
-            setTimeout(() => {
-                dataRefreshed = true;
-                console.log("data fetched");
-                setHomeState({...home, data: [...respData]});
-            }, 5000);
-         });
-    }, [home.refreshData]);
+        // fetch("/airports.json").then((res) => res.json()).then((respData) => {
+        //     setTimeout(() => {
+        //         console.log("data fetched");
+        //         setHomeState({...home, data: [...respData]});
+        //     }, 1000);
+        //  });
+    }, []);
 
     const getSearchableData = event => {
         event.persist();
         const {value} = event.target;
-        if(home.refreshData) {
-            setHomeState({...home, refreshData:true});
-        }
         dataSearch = new Promise((resolve, reject) => {
-            let data = home.data.filter((data) => data.name.indexOf(value) != -1 );
-            setTimeout(() => {
-                if(event.target)
-                resolve(data);
-                else
-                reject({error: "Event not specified"});
-            },0);
-
+            if(home.refreshData) {
+                fetch("/airports.json").then((res) => res.json()).then((respData) => {
+                    setTimeout(() => {
+                        console.log("data fetched");
+                        setHomeState({...home, data: [...respData], refreshData:false});
+                        let data = respData.filter((data) => data.name.indexOf(value) != -1 );
+                        if(event.target)
+                        resolve(data);
+                        else
+                        reject({error: "Event not specified"});
+                    }, 1000);
+                 });
+            } else {
+                let data = home.data.filter((data) => data.name.indexOf(value) != -1 );
+                setTimeout(() => {
+                    if(event.target)
+                    resolve(data);
+                    else
+                    reject({error: "Event not specified"});
+                },0);
+            }
         });
         return dataSearch;
     }

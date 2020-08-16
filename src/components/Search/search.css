@@ -23,6 +23,15 @@
     display: flex;
     flex-direction: row;
 }
+.totalSection{
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #666666;
+    height: 25px;
+    display: flex;
+    flex-direction: row;
+}
 .visible{
     display: flex;
 }

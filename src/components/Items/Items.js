@@ -35,8 +35,7 @@ const Items = (props) => {
         className={clsx(classes.items, className)}
         {...other}>
           {
-              items.map((element, index) => {
-                selectedItems.filter((e)=>element.code === e.code).length 
+              items.map((element, index) => { 
                 return <Item key={element.code} onSelect={setForSelection} selected={selectedItems.filter((e)=>element.code === e.code).length > 0} data={element} className={clsx(classes.itemsElement)}
                 {...other} > some item </Item>
               })
