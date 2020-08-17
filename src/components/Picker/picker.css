@@ -1,5 +1,5 @@
 .picker{
-    min-width: 600px;
+    width: 600px;
 }
 .selectorPanel {
     width: calc( 100% - 5px);
