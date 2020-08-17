@@ -10,7 +10,6 @@ const Search = (props) => {
   const searchRef = React.useRef(null);
 
   const clearSearch = () => {
-    console.log('clear search clicked');
     searchRef.current.value = "";
     searchRef.current.focus();
     onReset();
@@ -25,7 +24,11 @@ const Search = (props) => {
       className={clsx(classes.searchContainer, className)}
       {...other}
     >
-      <input ref={searchRef} className={clsx(defaultClasses.inputBox, classes.inputBox)} onChange={onSearch} placeholder="SEARCH BY AIRPORT NAME OR CITY NAME..." id="search"/>
+      <input ref={searchRef} 
+      className={clsx(defaultClasses.inputBox, classes.inputBox)} 
+      onChange={onSearch} 
+      placeholder="SEARCH BY AIRPORT NAME OR CITY NAME..." 
+      id="search" autoComplete="off"/>
       <div className={clsx(classes.clearSection, totalRecords > 0 ? classes.visible : classes.invisible)}>
         <div className={clsx(classes.clearInfo)}>{totalRecords > 999 ? "999+" : totalRecords} </div>
         <div className={clsx(classes.clearCloseButton)}>

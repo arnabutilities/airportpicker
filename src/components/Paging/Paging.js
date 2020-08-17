@@ -26,9 +26,10 @@ const Paging = (props) => {
     });
 
     const nextBtnClick = () => {
-      let ci = paging.currentIndex >= paging.lastIndex ? paging.lastIndex : (paging.currentIndex+1);
+      let ci = (paging.currentIndex >= paging.lastIndex) ? paging.lastIndex : (paging.currentIndex+1);
        setPagingState({...paging, currentIndex: ci});
      };
+
      const prevBtnClick = () => {
       let ci = paging.currentIndex <= 0 ? 0 : (paging.currentIndex-1);
       setPagingState({...paging, currentIndex: ci});
@@ -36,8 +37,8 @@ const Paging = (props) => {
 
   React.useEffect(() => {
     let li = 0;
-    (totalRecord % recordPerPage == 0) ? li = totalRecord / recordPerPage : li = totalRecord / recordPerPage + 1;
-    setPagingState({...paging, lastIndex: li, currentIndex: paging.currentIndex >= li ? li : paging.currentIndex});
+    li = (totalRecord % recordPerPage == 0) ?  totalRecord / recordPerPage : li = ((totalRecord / recordPerPage) + 1);
+    setPagingState({...paging, lastIndex: (Math.floor(li) - 1), initialIndex:0, currentIndex: 0});
 
   }, [totalRecord, recordPerPage]);
 

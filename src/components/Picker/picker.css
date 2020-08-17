@@ -18,9 +18,7 @@
     margin-left: 8px;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
 }
-.items{
-    
-}
+
 .paging{
     height: 32px;
     padding:10px;
@@ -38,6 +36,8 @@
 }
 .loaderShow{
     display: block;
+    border-top: 1px solid #cccccc;
+    padding-top:10px;
 }
 .loaderHide{
     display: none;

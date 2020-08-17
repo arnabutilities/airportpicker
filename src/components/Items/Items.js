@@ -14,13 +14,12 @@ const Items = (props) => {
   },[itemList]);
 
   const triggerChange = (currentIndex) => {
-    console.log(currentIndex);
     let pagingPos = currentIndex * pageSize;
     setItemsState(itemList.slice(pagingPos, pagingPos + pageSize));
-    console.log(itemList.length, items.length, pagingPos,  pagingPos + pageSize )
   }
 
   const setForSelection = (data,selection) => {
+    console.log("-->>", selection);
     onChangeSelection(data,selection);
   }
 
@@ -32,11 +31,15 @@ const Items = (props) => {
       onPageChange={triggerChange}
       className={clsx(classes.paging)}>
       <div 
-        className={clsx(classes.items, className)}
+        className={clsx(classes.items, itemList.length > 0 ? classes.show : classes.hide, classes.borderTop, className)}
         {...other}>
           {
               items.map((element, index) => { 
-                return <Item key={element.code} onSelect={setForSelection} selected={selectedItems.filter((e)=>element.code === e.code).length > 0} data={element} className={clsx(classes.itemsElement)}
+                return <Item key={element.code} 
+                onSelect={setForSelection} 
+                selected={selectedItems.filter((e)=>element.code === e.code).length > 0} 
+                data={element} 
+                className={clsx(classes.itemsElement)}
                 {...other} > some item </Item>
               })
           }

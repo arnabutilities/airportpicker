@@ -7,8 +7,10 @@
 }
 .inputBox {
     margin: 5px;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     width: 100%;
+    padding-left:0;
+    color:#666666;
 }
 .button {
     margin: 5px;
@@ -16,7 +18,7 @@
 }
 .clearSection{
     text-align: center;
-    font-size: 12px;
+    font-size: 0.8rem;
     font-weight: 600;
     color: #666666;
     height: 25px;
@@ -25,7 +27,7 @@
 }
 .totalSection{
     text-align: center;
-    font-size: 12px;
+    font-size: 0.8rem;
     font-weight: 600;
     color: #666666;
     height: 25px;

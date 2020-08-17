@@ -15,10 +15,10 @@ const Picker = (props) => {
     data: [],
     selections: [],
     showCard: false,
-    showLoading:false
+    showLoading: true
   });
 
-  const pickerElementRef = React.useRef(null);
+  const pickerElementRef = React.useRef(null);  
 
   const { 
     // callback to fetch data on search key entry
@@ -38,6 +38,9 @@ const Picker = (props) => {
     
     // supplied class name
     className,
+
+    // set initial data
+    initialData,
     
     // handel additional parameters
     ...other } = props;
@@ -50,9 +53,9 @@ const Picker = (props) => {
     }
   }, [picker]);
 
-  // React.useEffect(() => {
-  //   setPickerState({...picker, data:setData});
-  // },[setData]);
+   React.useEffect(() => {
+     setPickerState({...picker, data:initialData, showLoading: initialData.length > 0 ? false : true});
+   },[initialData]);
 
   React.useEffect(() => {
     setPickerState({...picker, showCard:setVisibility});
@@ -116,7 +119,14 @@ const Picker = (props) => {
       className={clsx(classes.selectorPanel, picker.showCard ? classes.showCard : classes.hideCard)}
       {...other}
     >
-      <Search onSearch={handelSearch} onReset={resetSearch} totalSelection={picker.selections} onClearSelection={clearSelection} totalRecords={picker.data.length} className={clsx(classes.search)}></Search>
+      <Search 
+        onSearch={handelSearch} 
+        onReset={resetSearch} 
+        totalSelection={picker.selections} 
+        onClearSelection={clearSelection} 
+        totalRecords={picker.data.length} 
+        className={clsx(classes.search)}/>
+        
       <div className={clsx(classes.loader, picker.showLoading ? classes.loaderShow : classes.loaderHide)}>Loading...</div>
       {/* <div className={clsx(classes.loader, picker.data.length == 0 ? classes.loaderShow : classes.loaderHide)}>Please provide a valid airport or city name.</div> */}
       <Items itemList={picker.data} selectedItems={picker.selections} onChangeSelection={changeSelection} className={clsx(classes.items)}></Items>

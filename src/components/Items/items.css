@@ -9,3 +9,13 @@
     margin:1px;
     max-height: 50px;
 }
+.show{
+    display: flex;
+}
+.hide {
+    display: none;
+}
+.borderTop {
+    border-top: 1px solid #cccccc;
+    padding-top:10px;
+}
