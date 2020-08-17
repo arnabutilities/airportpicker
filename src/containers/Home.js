@@ -33,7 +33,7 @@ const Home = (props) => {
                     setTimeout(() => {
                         console.log("data fetched");
                         setHomeState({...home, data: [...respData], refreshData:false});
-                        let data = respData.filter((data) => data.name.indexOf(value) != -1 );
+                        let data = respData.filter((data) => data.name.indexOf(value) != -1  || data.city.indexOf(value) != -1);
                         if(event.target)
                         resolve(data);
                         else
@@ -41,7 +41,7 @@ const Home = (props) => {
                     }, 1000);
                  });
             } else {
-                let data = home.data.filter((data) => data.name.indexOf(value) != -1 );
+                let data = home.data.filter((data) => data.name.indexOf(value) != -1  || data.city.indexOf(value) != -1);
                 setTimeout(() => {
                     if(event.target)
                     resolve(data);
