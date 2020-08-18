@@ -51,17 +51,19 @@ const Paging = (props) => {
   return (
     <div>
       {props.children}
+      { (totalRecord > recordPerPage) ?
       <div
-        className={clsx(classes.paging, totalRecord < recordPerPage ? classes.hide : classes.show, className)}
+        className={clsx(classes.paging, className)}
         {...other}
       >
-        <div onClick={nextBtnClick} className={clsx(classes.next, paging.lastIndex !== paging.currentIndex ? classes.enabled : classes.disabled)}>
+        <div onClick={nextBtnClick} className={clsx(classes.next, paging.lastIndex !== paging.currentIndex ? classes.enabled : classes.disabled, 'next')}>
           <FontAwesomeIcon icon={faArrowCircleRight} />
         </div>
-        <div onClick={prevBtnClick} className={clsx(classes.prev, paging.currentIndex !== 0 ? classes.enabled : classes.disabled)}>
+        <div onClick={prevBtnClick} className={clsx(classes.prev, paging.currentIndex !== 0 ? classes.enabled : classes.disabled, 'prev')}>
           <FontAwesomeIcon icon={faArrowCircleLeft} />
         </div>
       </div>
+      : ''}
     </div>
   );
 };

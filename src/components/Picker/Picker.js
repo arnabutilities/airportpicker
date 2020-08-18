@@ -115,8 +115,9 @@ const Picker = (props) => {
       className={clsx(defaultClasses.button, classes.button)}
       key='trigger_selector' onClick={toggleCard}> Click Here </button>
 
+      { picker.showCard ? 
     <Card key='selector'
-      className={clsx(classes.selectorPanel, picker.showCard ? classes.showCard : classes.hideCard)}
+      className={clsx(classes.selectorPanel, classes.showCard)}
       {...other}
     >
       <Search 
@@ -127,10 +128,9 @@ const Picker = (props) => {
         totalRecords={picker.data.length} 
         className={clsx(classes.search)}/>
         
-      <div className={clsx(classes.loader, picker.showLoading ? classes.loaderShow : classes.loaderHide)}>Loading...</div>
-      {/* <div className={clsx(classes.loader, picker.data.length == 0 ? classes.loaderShow : classes.loaderHide)}>Please provide a valid airport or city name.</div> */}
+      { picker.showLoading ? <div className={clsx(classes.loader,classes.loaderShow)}>Loading...</div> : '' }
       <Items itemList={picker.data} selectedItems={picker.selections} onChangeSelection={changeSelection} className={clsx(classes.items)}></Items>
-    </Card>
+    </Card> : '' }
   </div>);
 };
 Picker.propTypes = {

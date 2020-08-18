@@ -5,7 +5,7 @@ import Item from '../Item/Item';
 import Paging from '../Paging/Paging';
 
 const Items = (props) => {
-  const { itemList, selectedItems, onChangeSelection, className,  ...other } = props;
+  const { itemList = {}, selectedItems = [], onChangeSelection, className,  ...other } = props;
   const [items, setItemsState] = React.useState([]);
   let pageSize = 9;
 
@@ -19,7 +19,6 @@ const Items = (props) => {
   }
 
   const setForSelection = (data,selection) => {
-    console.log("-->>", selection);
     onChangeSelection(data,selection);
   }
 

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 const Item = (props) => {
-  const { data, onSelect, className, selected = false, ...other } = props;
+  const { data = {}, onSelect, className, selected = false, ...other } = props;
   const [item, setItemState] = React.useState({ selected: selected });
 
   const toggleSelection = () => {
@@ -27,10 +27,10 @@ const Item = (props) => {
       onClick={toggleSelection}
       {...other}
     >
-      <div className={clsx(classes.name, className)}>{data.name}</div>
-      <div className={clsx(classes.code, className)}>{data.code}</div>
-      <div className={clsx(classes.city, className)}>{data.city}</div>
-      <div className={clsx(item.selected ? classes.selected : classes.notSelected, className)}>
+      <div className={clsx(classes.name, className, 'name')}>{data.name}</div>
+      <div className={clsx(classes.code, className, 'code')}>{data.code}</div>
+      <div className={clsx(classes.city, className, 'city')}>{data.city}</div>
+      <div className={clsx(item.selected ? classes.selected : classes.notSelected, className, "checkIcon")} data-visible={item.selected}>
         <FontAwesomeIcon icon={faCheckCircle} />
       </div>
     </a>

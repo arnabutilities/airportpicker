@@ -1,27 +1,14 @@
-import * as React from 'react';
-import { expect } from 'chai';
-import { getClasses, createMount, createClientRender, describeConformance } from 'test/utils';
+import React from 'react';
+import {configure, shallow} from 'enzyme';
+import Adaptor from 'enzyme-adapter-react-16';
 import Card from './Card';
-import Paper from '../Paper';
+
+configure({adapter: new Adaptor()});
 
 describe('<Card />', () => {
-  const mount = createMount();
-  let classes;
-  const render = createClientRender();
-  before(() => {
-    classes = getClasses(<Card />);
-  });
-
-  describeConformance(<Card />, () => ({
-    classes,
-    inheritComponent: Paper,
-    mount,
-    refInstanceof: window.HTMLDivElement,
-    skip: ['componentProp'],
-  }));
-
-  it('when raised should render Paper with 8dp', () => {
-    const { container } = render(<Card raised />);
-    expect(container.firstChild).to.have.class('MuiPaper-elevation8');
-  });
+    it('should accept data and will have name , code, and city', () => {
+      // testing nodata component
+       const wrapper = shallow(<Card/>);
+       expect(wrapper.find('div')).toHaveLength(1);
+    } );
 });
