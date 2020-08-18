@@ -18,7 +18,7 @@ const Home = (props) => {
         const { value } = event.target;
         setHomeState({...home, searchKey: value });
         dataSearch = new Promise((resolve, reject) => {
-            let data = home.data.filter((data) => data.name.indexOf(value) != -1 || data.city.indexOf(value) != -1);
+            let data = home.data.filter((data) => data.name.toLowerCase().indexOf(value) == 0 || data.city.toLowerCase().indexOf(value) == 0);
             event.target ? resolve(data) : reject({ error: "Event not specified" });
         });
         return dataSearch;
@@ -50,7 +50,7 @@ const Home = (props) => {
             }}
             initialData={home.data.filter((data, index)=>{
                 
-                if(data.name.indexOf(home.searchKey) != -1 || data.city.indexOf(home.searchKey) != -1){
+                if(data.name.toLowerCase().indexOf(home.searchKey) == 0 || data.city.toLowerCase().indexOf(home.searchKey) == 0){
                     return data;
                 }
                 return false;
