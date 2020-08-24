@@ -8,24 +8,42 @@ import Search from '../Search';
 import Items from '../Items';
 import PropTypes from 'prop-types';
 
-
+/**
+ * 
+ * @param {React.props} props are supplied attributes from parent object. for Picker component supplied properties are initial state and event Callbacks.
+ * ### Callbacks
+ * ```
+ * onShow(): this callback executes when picker component becomes visible
+ * onHide(): this callback executes when picker component becomes hidden
+ * onSearch() : this callback executes on keyup of search input
+ * onSelections() : this callback executes once we select/deselect any item from search result 
+ * ```
+ * ### Initial values
+ * ```
+ *  initialData:[Object] searchable initialData, this data should be provided in order to perform search.
+ *  setVisibility:boolean this field value will show or hide picker component (true: show, false:hide [default]) 
+ * 
+ * ```
+ * Picker is a dumb component and should not not contain any business logic. 
+ */
 const Picker = (props) => {
 
   const [picker, setPickerState] = React.useState({
     data: [],
     selections: [],
     showCard: false,
-    showLoading: true
+    showLoading: true,
+    searchKey: ''
   });
 
   const pickerElementRef = React.useRef(null);  
 
   const { 
     // callback to fetch data on search key entry
-    getSearchableData,
+    onSearch,
 
     // picker default visibility option
-    setVisibility,
+    setVisibility=false,
     
     // callback on selecting any item
     onSelection,
@@ -87,10 +105,9 @@ const Picker = (props) => {
 
   const handelSearch = (event) => {
     setPickerState({...picker, showLoading:true});
-    getSearchableData(event).then((setData) => {
-      setPickerState({...picker, data:setData, showLoading:false});
-    });
-
+    let searchedData = onSearch(event);
+    let { value } = event.target;
+    setPickerState({...picker, data:searchedData, searchKey: value, showLoading:false});
   }
   const resetSearch = () => {
     setPickerState({...picker, data:[]});
@@ -108,31 +125,30 @@ const Picker = (props) => {
       setPickerState({...picker, selections: []});
   }
 
-  return (<div
-    className={clsx(classes.picker)}
-    ref = {pickerElementRef} >
-    <button
-      className={clsx(defaultClasses.button, classes.button)}
-      key='trigger_selector' onClick={toggleCard}> Click Here </button>
-
-      { picker.showCard ? 
-    <Card key='selector'
-      className={clsx(classes.selectorPanel, classes.showCard)}
-      {...other}
-    >
-      <Search 
-        onSearch={handelSearch} 
-        onReset={resetSearch} 
-        totalSelection={picker.selections} 
-        onClearSelection={clearSelection} 
-        totalRecords={picker.data.length} 
-        className={clsx(classes.search)}/>
-        
-      { picker.showLoading ? <div className={clsx(classes.loader,classes.loaderShow)}>Loading...</div> : '' }
-      <Items itemList={picker.data} selectedItems={picker.selections} onChangeSelection={changeSelection} className={clsx(classes.items)}></Items>
-    </Card> : '' }
+  return (<div className={clsx(classes.picker)} ref = {pickerElementRef} >
+    <button key='trigger_selector' onClick={toggleCard} className={clsx(defaultClasses.button, classes.button)}>
+      Click Here
+    </button>
+    { picker.showCard ? 
+        <Card key='selector' className={clsx(classes.selectorPanel, classes.showCard)}  {...other}>
+          <Search 
+            onSearch={handelSearch}
+            onReset={resetSearch}
+            onClearSelection={clearSelection}
+            totalSelection={picker.selections}
+            totalRecords={picker.data.length} 
+            initialValue={picker.searchKey} 
+            className={clsx(classes.search)}/>
+          { picker.showLoading ? 
+            <div className={clsx(classes.loader,classes.loaderShow)}>Loading...</div> 
+            : '' }
+          <Items itemList={picker.data} selectedItems={picker.selections} onChangeSelection={changeSelection} className={clsx(classes.items)}/>
+        </Card> 
+      : '' }
   </div>);
 };
+
+// setting up types
 Picker.propTypes = {
   onSelection: PropTypes.func,
   onSearch: PropTypes.func,

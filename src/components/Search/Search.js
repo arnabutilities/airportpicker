@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 const Search = (props) => {
-  const { onSearch, onReset, onClearSelection, totalRecords, totalSelection = {}, className, ...other } = props;
+  const { onSearch, onReset, onClearSelection, totalRecords, totalSelection = {}, initialValue = "", className, ...other } = props;
   const searchRef = React.useRef(null);
 
   const clearSearch = () => {
@@ -28,7 +28,7 @@ const Search = (props) => {
         className={clsx(defaultClasses.inputBox, classes.inputBox)}
         onChange={onSearch}
         placeholder="SEARCH BY AIRPORT NAME OR CITY NAME..."
-        id="search" autoComplete="off" />
+        id="search" autoComplete="off" value={initialValue} />
       {(totalRecords > 0) ?
         <div className={clsx(classes.clearSection, 'totalRecords')}>
           <div className={clsx(classes.clearInfo, 'records')}>{totalRecords > 999 ? "999+" : totalRecords} </div>
