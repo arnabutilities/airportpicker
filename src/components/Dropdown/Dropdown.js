@@ -80,7 +80,7 @@ class Dropdown extends Component {
     }
 
     static getDerivedStateFromProps(props, state){
-        console.log('getDerivedStateFromProps: ', state, props);
+     //   console.log('getDerivedStateFromProps: ', state, props);
         let newState;
         if(state.lastUpdate != props.dataVersion){
             newState = {
@@ -105,13 +105,7 @@ class Dropdown extends Component {
         });
     }
     componentDidMount(){
-        this.data = this.props.initialData;
-        let { value } = this.inputRef.current;
-        this.searchedData = this.data.filter((e) => {
-            if (e.name.toLowerCase().indexOf(value) === 0) {
-                return e;
-            } else return false;
-        });
+        this.componentDidUpdate();
         this.selections = this.props.selections;
     }
 
