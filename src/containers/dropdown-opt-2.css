@@ -1,0 +1,31 @@
+.picker {
+    margin:auto;
+}
+.selectedUl{
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin:0;
+   
+    flex-wrap: wrap;
+}
+.selectedLi{
+    width: 99px;
+    background-color: #efefef;
+    border:1px solid #cccccc;
+    margin: 2px;
+    list-style: none;
+}
+.selections{
+    max-width: 550px;
+    height: 100px;
+    min-width: 300px;
+    background-color: #efefef;
+    border:1px solid #cccccc;
+    margin-bottom: 10px;
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+.dropdown{
+    max-width: 200px;
+}

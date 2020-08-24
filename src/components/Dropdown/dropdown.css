@@ -1,0 +1,38 @@
+.content{
+    max-height: 150px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+.overlay{
+    top:0;
+    height:150px;
+    width:200px;
+}
+.scrollableContent{
+    width:100%;
+    max-width:100%;
+}
+.li{
+    list-style: none;
+    padding: 5px;
+    width: 100%;
+    padding-left: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.li:hover{
+    background-color: #efefef;
+    cursor:pointer;
+}
+.selectedLi{
+    background-color: #efefef;
+    cursor:pointer;
+}
+.ul{
+    padding:0;
+    margin:0;
+}
+.input{
+    width: calc(100% - 8px);
+}
